@@ -1,6 +1,9 @@
 using FluentValidation;
+using jayreservices_dotnet.Domain;
+using jayreservices_dotnet.Features.Auth;
 using jayreservices_dotnet.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -52,6 +55,12 @@ builder.Services.AddCors(options =>
 // Register Fluent validators
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
+// Register Password Hasher
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+// Register Auth Service
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -61,6 +70,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
