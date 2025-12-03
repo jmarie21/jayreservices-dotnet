@@ -1,0 +1,6 @@
+@jayreservices_dotnet_HostAddress = http://localhost:5250
+
+GET {{jayreservices_dotnet_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
