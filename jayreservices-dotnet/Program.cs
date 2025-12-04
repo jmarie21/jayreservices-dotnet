@@ -1,6 +1,7 @@
 using FluentValidation;
-using jayreservices_dotnet.Domain;
-using jayreservices_dotnet.Features.Auth;
+using jayreservices_dotnet.Domain.Entities;
+using jayreservices_dotnet.Features.Auth.Interfaces;
+using jayreservices_dotnet.Features.Auth.Services;
 using jayreservices_dotnet.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -57,6 +58,9 @@ builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 // Register Password Hasher
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+// Register JWT Service
+builder.Services.AddScoped<IJwtService, JwtService>();
 
 // Register Auth Service
 builder.Services.AddScoped<IAuthService, AuthService>();

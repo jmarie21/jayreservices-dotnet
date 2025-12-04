@@ -1,4 +1,4 @@
-﻿using jayreservices_dotnet.Domain;
+﻿using jayreservices_dotnet.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace jayreservices_dotnet.Infrastructure.Persistence
